@@ -1,1 +1,5 @@
+com\memorynotfound\services\CourseRequest.class
+com\memorynotfound\services\CourseResponse.class
+com\memorynotfound\services\package-info.class
+com\memorynotfound\services\ObjectFactory.class
 com\myproject\soapapp\Hello.class
