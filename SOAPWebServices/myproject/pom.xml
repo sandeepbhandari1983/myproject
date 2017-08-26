@@ -12,10 +12,17 @@
            <artifactId>maven-war-plugin</artifactId>
            <version>2.3</version>
       </plugin>
-	  
-	  
-	  
-</plugins>
+<!-- JAXBXJC Plugin to General Java class from XSD  -->    
+ <!-- JAXBXJC Plugin to General Java class from XSD  -->     <plugin>    <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId>
+               <version>1.4</version> <executions>
+                  <execution> <id>xjc</id> <goals> <goal>xjc</goal> </goals> </execution>
+               </executions> <configuration>  <clearOutputDir>false</clearOutputDir>
+			      <outputDirectory>target/generated-source</outputDirectory>
+				  <schemaDirectory>src/main/resources/schema</schemaDirectory>
+				  <includeSchema>**/*.xsd</includeSchema>
+			      <bindingDirectory>src/main/resources/binding</bindingDirectory>
+				  <enableIntrospection>false</enableIntrospection>                  <sources> <source>src/main/resources/schema.xsd</source>  </sources>                </configuration> </plugin>  
+				  </plugins>
 </build>
 
   <url>http://maven.apache.org</url>
