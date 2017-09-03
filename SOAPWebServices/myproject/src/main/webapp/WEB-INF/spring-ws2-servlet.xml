@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util.xsd
+   http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- bean definitions here -->
+	
+	<context:component-scan base-package="com.myproject.soapapp,com.liverestaurant.orderservice">
+ </context:component-scan>
+	
+<bean id="placeOrderRequest" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition"
+p:portTypeName="placeOrderRequest" p:locationUri="/ws/" p:requestSuffix="Request" 
+p:responseSuffix="Order">
+<property name="createSoap12Binding" value="true" />
+<property name="createSoap11Binding" value="false"/>
+<property name="schema">
+<bean class="org.springframework.xml.xsd.SimpleXsdSchema" p:xsd="classpath:schema/schema.xsd">
+</bean>
+</property>
+</bean>
+
+	 <bean
+              class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
+			  </bean>
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+<description>soap1.2</description>	
+	<property name="soapVersion" >
+	<util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12"></util:constant>
+	</property>		  
+	</bean>
+	<bean id="marshaller"  class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+	p:contextPath="com.liverestaurant.orderservice.schema">
+	
+	</bean>
+	
+	<bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
+	<description>Enable the Message dispatcher servlet to  invoke Methods</description>
+	<constructor-arg ref="marshaller" />
+	</bean>
+	
+</beans>
