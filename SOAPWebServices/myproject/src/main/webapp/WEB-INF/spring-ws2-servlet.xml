@@ -15,9 +15,9 @@
 	<context:component-scan base-package="com.myproject.soapapp,com.liverestaurant.orderservice">
  </context:component-scan>
 	
-<bean id="placeOrderRequest" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition"
-p:portTypeName="placeOrderRequest" p:locationUri="/ws/" p:requestSuffix="Request" 
-p:responseSuffix="Order">
+<bean id="cancelOrderRequest" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition"
+p:portTypeName="cancelOrderRequest" p:locationUri="/ws/" p:requestSuffix="Request" 
+p:responseSuffix="Response">
 <property name="createSoap12Binding" value="true" />
 <property name="createSoap11Binding" value="false"/>
 <property name="schema">
@@ -35,14 +35,5 @@ p:responseSuffix="Order">
 	<util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12"></util:constant>
 	</property>		  
 	</bean>
-	<bean id="marshaller"  class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
-	p:contextPath="com.liverestaurant.orderservice.schema">
-	
-	</bean>
-	
-	<bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
-	<description>Enable the Message dispatcher servlet to  invoke Methods</description>
-	<constructor-arg ref="marshaller" />
-	</bean>
-	
+
 </beans>
